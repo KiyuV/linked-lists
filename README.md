@@ -1,0 +1,1 @@
+This project aims to build a linked list data structure from scratch in Ruby.
