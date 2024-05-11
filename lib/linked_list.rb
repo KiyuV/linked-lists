@@ -9,12 +9,13 @@ class LinkedList
   end
 
   def append(value)
+    new_node = Node.new(value)
     if @head.nil?
-      @head = Node.new(value)
+      @head = new_node
+      @tail = new_node
     else
-      node = @head
-      node = node.next_node until node.next_node.nil?
-      node.next_node = Node.new(value)
+      @tail.next_node = new_node
+      @tail = new_node
     end
   end
 
