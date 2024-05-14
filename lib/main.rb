@@ -9,13 +9,17 @@ class Main
 
   def run
     @list.append(1)
-    @list.append(1)
+    @list.append(3)
     @list.prepend(2)
-  
+
     @list.to_s
     p @list.size
     p @list.head
     p @list.tail
+
+    @list.at(2)
+    list.pop
+
   end
 end
 

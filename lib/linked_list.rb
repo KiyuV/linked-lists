@@ -14,11 +14,10 @@ class LinkedList
     new_node = Node.new(value)
     if @head.nil?
       @head = new_node
-      @tail = new_node
     else
       @tail.next_node = new_node
-      @tail = new_node
     end
+    @tail = new_node
   end
 
   def prepend(value)
@@ -33,9 +32,7 @@ class LinkedList
     end
   end
 
-  def size
-    @size
-  end
+  attr_reader :size
 
   def head
     @head.value
@@ -43,6 +40,29 @@ class LinkedList
 
   def tail
     @tail.value
+  end
+
+  def at(index)
+    node = @head
+    i = 0
+    return 'Error: Index out of bounds' if index >= size
+
+    loop do
+      break if i == index
+
+      node = node.next_node
+      i += 1
+    end
+
+    node.value
+  end
+
+  def pop
+    node = @head
+    unless node.next_node.nil?
+      node = node.next_node
+    end
+    node.next_node = nil
   end
 
   def to_s
