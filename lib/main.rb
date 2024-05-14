@@ -13,9 +13,9 @@ class Main
     @list.prepend(2)
 
     @list.to_s
-    p @list.size
-    p @list.head
-    p @list.tail
+    puts "Size: #{@list.size}"
+    puts "Head: #{@list.head}"
+    puts "Tail: #{@list.tail}"
 
     @list.at(2)
     @list.pop

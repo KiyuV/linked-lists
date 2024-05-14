@@ -35,11 +35,19 @@ class LinkedList
   attr_reader :size
 
   def head
-    @head.value
+    if @head.nil?
+      'nil'
+    else
+      @head.value
+    end
   end
 
   def tail
-    @tail.value
+    if @tail.nil?
+      'nil'
+    else
+      @tail.value
+    end
   end
 
   def at(index)
@@ -59,25 +67,31 @@ class LinkedList
 
   def pop
     current_node = @head
-    until current_node.nil?
-      return @head = nil if current_node.next_node.nil?
-
-      following_node = current_node.next_node
-      return current_node.next_node = nil if following_node.next_node.nil?
-
-      current_node = following_node
-
+    while current_node!= nil
+      if current_node.next_node != nil
+        following_node = current_node.next_node
+        if following_node.next_node == nil
+          @size -= 1
+          return current_node.next_node = nil
+        else
+          current_node = following_node
+        end
+      else
+        @size -= 1
+        return @head = nil
+      end
     end
   end
 
   def contains?(value)
     node = @head
-    until node.nil?
+    while node != nil
       return true if node.value == value
-      return false if node.next_node.nil?
-
-      node = node.next_node
-
+      if node.next_node.nil?
+        return false
+      else
+        node = node.next_node
+      end
     end
     false
   end
