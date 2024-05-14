@@ -36,7 +36,7 @@ class LinkedList
 
   def head
     if @head.nil?
-      'nil'
+      nil
     else
       @head.value
     end
@@ -44,7 +44,7 @@ class LinkedList
 
   def tail
     if @tail.nil?
-      'nil'
+      nil
     else
       @tail.value
     end
@@ -53,7 +53,7 @@ class LinkedList
   def at(index)
     node = @head
     i = 0
-    return 'Error: Index out of bounds' if index >= size
+    return nil if index >= @size
 
     loop do
       break if i == index
@@ -67,10 +67,10 @@ class LinkedList
 
   def pop
     current_node = @head
-    while current_node!= nil
-      if current_node.next_node != nil
+    until current_node.nil?
+      if !current_node.next_node.nil?
         following_node = current_node.next_node
-        if following_node.next_node == nil
+        if following_node.next_node.nil?
           @size -= 1
           return current_node.next_node = nil
         else
@@ -85,15 +85,75 @@ class LinkedList
 
   def contains?(value)
     node = @head
-    while node != nil
+    until node.nil?
       return true if node.value == value
-      if node.next_node.nil?
-        return false
-      else
-        node = node.next_node
-      end
+      return false if node.next_node.nil?
+
+      node = node.next_node
+
     end
     false
+  end
+
+  def find(value)
+    node = @head
+    index = 0
+    until node.nil?
+      return index if node.value == value
+
+      break if node.next_node.nil?
+
+      index += 1
+      node = node.next_node
+
+    end
+    nil
+  end
+
+  # inserts a new node at the provided index
+  def insert_at(value, index)
+    raise IndexError if index >= @size
+
+    return prepend(value) if index.zero?
+
+    i = 0
+    current_node = @head
+    following_node = current_node.next_node
+
+    until i == (index - 1)
+      current_node = following_node
+      following_node = current_node.next_node
+      i += 1
+    end
+
+    current_node.next_node = Node.new(value, following_node)
+    @size += 1
+    nil
+  end
+
+  def remove_at(index)
+    raise IndexError if index >= @size
+
+    if index.zero?
+      tmp = @head
+      @head = @head.next_node
+      @size -= 1
+      tmp.value
+    else
+      i = 0
+      current_node = @head
+      following_node = current_node.next_node
+
+      until i == (index - 1)
+        current_node = following_node
+        following_node = current_node.next_node
+        i += 1
+      end
+
+      current_node.next_node = following_node.next_node
+      @size -= 1
+      following_node.value
+    end
   end
 
   def to_s

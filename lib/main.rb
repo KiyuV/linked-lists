@@ -11,17 +11,22 @@ class Main
     @list.append(1)
     @list.append(3)
     @list.prepend(2)
+    @list.append(4)
 
     @list.to_s
-    puts "Size: #{@list.size}"
-    puts "Head: #{@list.head}"
-    puts "Tail: #{@list.tail}"
+    @list.size
+    @list.head
+    @list.tail
 
     @list.at(2)
-    @list.pop
-    @list.pop
+    @list.contains?(1)
+    @list.find(1)
 
-    p @list.contains?(1)
+    @list.insert_at(100, 3)
+    @list.to_s
+
+    @list.remove_at(2)
+    @list.to_s
   end
 end
 
