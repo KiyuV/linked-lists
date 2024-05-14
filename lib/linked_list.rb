@@ -58,11 +58,28 @@ class LinkedList
   end
 
   def pop
-    node = @head
-    unless node.next_node.nil?
-      node = node.next_node
+    current_node = @head
+    until current_node.nil?
+      return @head = nil if current_node.next_node.nil?
+
+      following_node = current_node.next_node
+      return current_node.next_node = nil if following_node.next_node.nil?
+
+      current_node = following_node
+
     end
-    node.next_node = nil
+  end
+
+  def contains?(value)
+    node = @head
+    until node.nil?
+      return true if node.value == value
+      return false if node.next_node.nil?
+
+      node = node.next_node
+
+    end
+    false
   end
 
   def to_s

@@ -18,8 +18,10 @@ class Main
     p @list.tail
 
     @list.at(2)
-    list.pop
+    @list.pop
+    @list.pop
 
+    p @list.contains?(1)
   end
 end
 
