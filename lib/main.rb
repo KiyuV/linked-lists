@@ -10,9 +10,12 @@ class Main
   def run
     @list.append(1)
     @list.append(1)
-    @list.append(2)
-
+    @list.prepend(2)
+  
     @list.to_s
+    p @list.size
+    p @list.head
+    p @list.tail
   end
 end
 
